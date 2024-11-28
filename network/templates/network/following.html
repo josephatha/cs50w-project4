@@ -1,0 +1,26 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<h1>Following</h1>
+    <div class="allPosts">
+        {% for post in posts_of_the_page %}
+            <div>
+                <h5><a href="{% url 'profile' user_id=post.user.id %}">@{{ post.user }}</a></h5>
+                <h6>{{ post.content }}</h6>
+                <p>{{ post.date }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <nav arial-label="Page navigation example">
+        <ul class="pagination d-flex justify-content-center">
+            {% if posts_of_the_page.has_previous %}
+                <li class="page-time" <a class="page-link" href="?page={{ posts_of_the_page.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            {% if posts_of_the_page.has_next %}
+                <li class="page-time" <a class="page-link" href="?page={{ posts_of_the_page.next_page_number }}">Next</a></li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% endblock %}
